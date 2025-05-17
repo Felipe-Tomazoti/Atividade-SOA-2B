@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tendências de Nomes no Brasil</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <h1>Tendências de Nomes no Brasil</h1>
+
+  <nav>
+    <button data-aba="aba1">Evolução de Nome</button>
+    <button data-aba="aba2">Top 3 por Estado</button>
+    <button data-aba="aba3">Comparação de Dois Nomes</button>
+  </nav>
+
+  <section id="aba1" style="display:block;">
+    <h2>Evolução da Frequência de um Nome</h2>
+    <label for="nome1">Nome:</label>
+    <input type="text" id="nome1" value="joao">
+    <label for="deDec">De (década):</label>
+    <input type="number" id="deDec" value="1970" step="10" min="1930" max="2020">
+    <label for="ateDec">Até (década):</label>
+    <input type="number" id="ateDec" value="2000" step="10" min="1930" max="2020">
+    <button id="btnEvolucao">Buscar</button>
+    <canvas id="graficoEvolucao"></canvas>
+  </section>
+
+  <section id="aba2" style="display:none;">
+    <h2>Top 3 Nomes por Estado (UF)</h2>
+    <label for="uf">Selecione o Estado (UF):</label>
+    <select id="uf">
+      <option value="BR">Brasil (todas)</option>
+      <option value="11">RO</option><option value="12">AC</option>
+      <option value="13">AM</option><option value="14">RR</option>
+      <option value="15">PA</option><option value="16">AP</option>
+      <option value="17">TO</option><option value="21">MA</option>
+      <option value="22">PI</option><option value="23">CE</option>
+      <option value="24">RN</option><option value="25">PB</option>
+      <option value="26">PE</option><option value="27">AL</option>
+      <option value="28">SE</option><option value="29">BA</option>
+      <option value="31">MG</option><option value="32">ES</option>
+      <option value="33">RJ</option><option value="35">SP</option>
+      <option value="41">PR</option><option value="42">SC</option>
+      <option value="43">RS</option><option value="50">MS</option>
+      <option value="51">MT</option><option value="52">GO</option>
+      <option value="53">DF</option>
+    </select>
+    <button id="btnTop3">Buscar</button>
+    <table>
+      <thead>
+        <tr><th>Década</th><th>1º</th><th>2º</th><th>3º</th></tr>
+      </thead>
+      <tbody id="tabelaTop3"></tbody>
+    </table>
+  </section>
+
+  <section id="aba3" style="display:none;">
+    <h2>Comparação de Dois Nomes</h2>
+    <label for="nomeA">Nome 1:</label>
+    <input type="text" id="nomeA" value="joao">
+    <label for="nomeB">Nome 2:</label>
+    <input type="text" id="nomeB" value="maria">
+    <button id="btnComparar">Buscar</button>
+    <canvas id="graficoComparacao"></canvas>
+  </section>
+
+
+  <script src="./js/chartUtils.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
