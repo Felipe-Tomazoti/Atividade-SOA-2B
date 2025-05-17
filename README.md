@@ -47,3 +47,11 @@ atividadeArqSoa/
 ---
 
 *Desenvolvido para a Atividade Prática de SOA: Análise de Tendências de Nomes no Brasil.*
+
+Participantes:
+
+Diogo Tizolim Cedran - 220142122
+
+Nathan Lisandro Toppa - 220199712
+
+Felipe Cesar Tomazoti de Souza - 220199772
