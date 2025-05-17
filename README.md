@@ -4,17 +4,17 @@
 
 Este projeto exemplifica a aplicação de **Arquitetura Orientada a Serviços (SOA)** consumindo a API pública de nomes do IBGE.
 
-1. **Frequência de Nome** (`NomeService`)
+1. **Frequência de Nome** 
    - Endpoint interno: `GET /api/nome/evolucao?nome={nome}`
    - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}`
    - Frequência por década em JSON.
 
-2. **Ranking** (`RankingService`)
+2. **Ranking** 
    - Endpoint interno: `GET /api/nome/top3?localidade={UF}&decada={década}`
    - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?decada={década}&localidade={UF}`
    - Top 3 nomes por década.
 
-3. **Comparação** (`ComparacaoService`)
+3. **Comparação**
    - Endpoint interno: `GET /api/nome/comparar?nome1={nome1}&nome2={nome2}`
    - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome1}|{nome2}`
    - Frequência de ambos nomes.
