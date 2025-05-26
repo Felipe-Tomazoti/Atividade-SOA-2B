@@ -1,57 +1,48 @@
-# Tendências de Nomes no Brasil
+# Sistema SOA – Tendência de Nomes no Brasil
 
-## Visão Geral
+Este projeto demonstra, de forma mínima, uma arquitetura orientada a serviços (SOA) que consome a **API de nomes do IBGE**.
 
-Este projeto exemplifica a aplicação de **Arquitetura Orientada a Serviços (SOA)** consumindo a API pública de nomes do IBGE.
+```
+UI (SPA)  ──►  Gateway (BFF)  ──►  API IBGE
+```
 
-1. **Frequência de Nome** 
-   - Endpoint interno: `GET /api/nome/evolucao?nome={nome}`
-   - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}`
-   - Frequência por década em JSON.
-
-2. **Ranking** 
-   - Endpoint interno: `GET /api/nome/top3?localidade={UF}&decada={década}`
-   - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?decada={década}&localidade={UF}`
-   - Top 3 nomes por década.
-
-3. **Comparação**
-   - Endpoint interno: `GET /api/nome/comparar?nome1={nome1}&nome2={nome2}`
-   - Consulta: `https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome1}|{nome2}`
-   - Frequência de ambos nomes.
-
-### Frontend (SPA)
-
-- **HTML/CSS/JS** puro, com Chart.js para visualização.
-- Consome os endpoints internos e exibe:
-  1. Evolução da frequência (gráfico de linha).
-  2. Top 3 por estado (tabela).
-  3. Comparação de dois nomes (gráfico comparativo).
-
-## Estrutura de Pastas
-
+## Estrutura
 ```
 atividadeArqSoa/
-├── index.html           # SPA
-├── css/
-│   └── style.css        # Estilos
-├── js/
-│   └── app.js           # Lógica frontend
+├─ ui/               # Front‑end estático (HTML, CSS, JS)
+├─ gateway/          # Back‑end (API Gateway/BFF)
+│   ├─ routes/       # Nome, Ranking, Comparação
+│   └─ Dockerfile
+├─ docker-compose.yml
+└─ README.md
 ```
 
-## Boas Práticas SOA
+## Pré‑requisitos
+* Node.js 20+ **ou** Docker 24+
 
-- **/css**: cada serviço tem responsabilidade única.
-- **js/app.js**: Recebe interações da UI, orquestra quais serviços devem ser chamados, trata erros e repassa dados formatados para a view. Mantém a UI desacoplada das APIs externas..
-- **js/chartUtils.js**: Fornece um “serviço” de geração de gráficos (Chart.js) encapsulado. Pode ser invocado de qualquer página ou outro serviço sem duplicar código.
+## Executando com Docker
 
----
+```bash
+docker compose up --build
+```
 
-*Desenvolvido para a Atividade Prática de SOA: Análise de Tendências de Nomes no Brasil.*
+* Gateway disponível em **http://localhost:3001**
+* UI servida pelo próprio gateway – abra `http://localhost:3001/index.html`
 
-Participantes:
+## Executando sem Docker
 
-Diogo Tizolim Cedran - 220142122
+```bash
+cd gateway
+npm install
+node index.js
+```
+Depois abra `ui/index.html` em um servidor local (ex.: extensão *Live Server* do VSCode).
 
-Nathan Lisandro Toppa - 220199712
+## Rotas REST expostas
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/api/nomes/:nome?de=&ate=` | Série histórica de um nome |
+| GET | `/api/ranking?uf=&decada=` | Top 3 nomes por década na UF |
+| GET | `/api/comparacao?nomeA=&nomeB=` | Dados brutos para comparar dois nomes |
 
-Felipe Cesar Tomazoti de Souza - 220199772
+Sinta‑se livre para expandir, adicionar cache Redis, testes e Swagger!
